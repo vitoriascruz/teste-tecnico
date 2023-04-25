@@ -1,0 +1,143 @@
+Vitória Santa Cruz
+Questões de código resolvidas na linguagem C
+
+1) O valor da variável SOMA ao final do processamento é 91.
+
+2) 
+#include <stdio.h>
+
+int fibo(int n){
+
+int i, fib = 0, anterior = 0, subanterior = 1;
+	if(n == 1) 
+		return 0;
+		
+	if(n == 2)
+		return 1;
+
+	return fibo(n-1) + fibo(n-2);
+
+	for (i=3; i<=n; i++){
+		fib = anterior + subanterior;
+		anterior = subanterior;
+		subanterior = fib;
+	}
+	
+	return fib;
+}
+
+int main(void){
+	int n, resultado = 0;
+	printf("Digite o valor de entrada:");
+	scanf("%d", &n); 
+	resultado = fibo(n);
+	printf("A sequência de Fibonnaci para a entrada %d é: %d", n, resultado);
+
+return 0;
+}
+
+3) 
+#include <stdio.h>
+
+int main(void){
+	int i, n = 30, cont=0;
+	float maior = 0, menor = 900000;
+	float faturamento[n];
+	float total_mensal=0;
+	float media_mensal=0;
+	
+//Ler o faturamento diário 
+//Realizei a conversão do arquivo xml para txt pegando apenas os valores 
+    FILE *arquivo;
+    arquivo = fopen("faturamento.txt", "r");
+    
+    for(i=0;i<n;i++){
+        fscanf(arquivo,"%f", &faturamento[i]);
+
+    total_mensal += (faturamento[i]);
+    }
+    
+    media_mensal = total_mensal/30.0;
+    
+//    printf("Total mensal: %f\n", total_mensal);
+//    printf("Media mensal: %f\n", media_mensal = total_mensal/30.0);
+
+
+//Maior faturamento de faturamento em um dia de mês
+	for(i=0; i<n; i++){
+		if(faturamento[i] > maior)
+			maior = faturamento [i]; 		
+}
+//Menor valor de faturamento em um dia de mês
+for(i=0; i<n; i++){
+		if(faturamento[i] < menor)
+		    if(faturamento[i] != 0 )
+		        menor= faturamento [i]; 		
+}
+
+//Faturamento diário maior que média mensal
+for (i=0; i<n;i++){
+    if(faturamento[i] > media_mensal)
+        cont++;
+}
+
+printf("O menor valor de faturamento em um dia de mês é: %f\n", menor);
+printf("O maior valor de faturamento em um dia de mês é: %f\n", maior);
+printf("O número de dias no mês em que o valor de faturamento diário foi superior à média mensal é: %d\n", cont);
+
+fclose(arquivo);
+
+return 0;
+
+}
+
+4) 
+#include <stdio.h>
+
+int main(void){
+	double sp = 67836.43, rj = 36678.66, mg = 29229.88, es = 27165.48, outros = 19849.53, resultado = 0.0;
+	double p_sp = 0, p_rj = 0, p_mg = 0, p_es = 0, p_outros = 0, p_resultado = 0;
+	resultado = sp + rj + mg + es + outros;
+	
+	printf("O percentual de representação que cada estado teve dentro do valor total mensal da distribuidora é:\n\n");
+	
+	p_sp = (100*sp) / resultado;
+	printf("O percentual de São Paulo é:%f%%\n", p_sp);
+	
+	p_rj = (100*rj) / resultado;
+	printf("O percentual do Rio de Janeiro é:%f%%\n", p_rj);
+	
+	p_mg = (100*mg) / resultado;
+	printf("O percentual de Minas Gerais é:%f%%\n", p_mg);
+	
+	p_es = (100*es) / resultado;
+	printf("O percentual do Espirito Santo é:%f%%\n", p_es);
+	
+	p_outros = (100*outros) / resultado;
+	printf("O percentual de Outros é:%f%%\n\n", p_outros);
+
+    p_resultado = p_sp+p_rj+p_mg+p_es+p_outros;
+    printf("O faturamento mensal da distribuidora é %f - %f%%\n", resultado, p_resultado);
+    
+return 0;
+
+}
+
+5) 
+#include <stdio.h>
+#include <string.h>
+
+void inverte(char * string) {
+    int inv, i, j;
+    for (i = 0, j = strlen(string)-1; i < j; i++, j--)
+        inv = string[i], string[i] = string[j], string[j] = inv;
+}
+
+int main(void) {
+    char string[100];
+    printf("Digite uma palavra de até 100 letras: "); 
+    scanf("%100s", string);
+    inverte(string);
+    printf("%s\n", string);
+    return 0;
+}   
